@@ -150,7 +150,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Employee_Manager\ContractEmployeeManager.cs" />
+    <Compile Include="Employee_Manager\IEmployeeManager.cs" />
+    <Compile Include="Employee_Manager\PermanentEmployeeManager.cs" />
+    <Compile Include="Factory\EmployeeManagerFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -171,6 +176,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeePortalEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee_Type.cs">
+      <DependentUpon>EmployeePortalEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -252,7 +260,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Base\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Logger\Logger.csproj">
       <Project>{fadbec10-b300-48d7-9e7e-d19f8468ff6f}</Project>

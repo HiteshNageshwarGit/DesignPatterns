@@ -1,4 +1,6 @@
-﻿using DesignPatterns.Models;
+﻿using DesignPatterns.Employee_Manager;
+using DesignPatterns.Factory;
+using DesignPatterns.Models;
 using Logger;
 using System.Data.Entity;
 using System.Linq;
@@ -10,21 +12,8 @@ namespace DesignPatterns.Controllers
     public class EmployeesController : Controller
     {
        
-
-        private ILog _ILog;
         private DesignPatternTestDbEntities db = new DesignPatternTestDbEntities();
-
-        public EmployeesController()
-        {
-            _ILog = Log.GetInstance;
-        }
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            _ILog.LogException(filterContext.Exception.ToString());
-            filterContext.ExceptionHandled = true;
-            this.View("Error").ExecuteResult(this.ControllerContext);
-        }
-
+               
         // GET: Employees
         public ActionResult Index()
         {
@@ -49,6 +38,7 @@ namespace DesignPatterns.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
+            ViewBag.EmpTypes = db.Employee_Type.ToList();
             return View();
         }
 
@@ -57,10 +47,28 @@ namespace DesignPatterns.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,JobDescription,Number,Department")] Employee employee)
+        public ActionResult Create( Employee employee)
         {
             if (ModelState.IsValid)
             {
+                //if (employee.EmployeeTypeID == 1)
+                //{
+                //    employee.HourlyPay = 8;
+                //    employee.Bonus = 10;
+                //}
+                //else if (employee.EmployeeTypeID == 2)
+                //{
+                //    employee.HourlyPay = 12;
+                //    employee.Bonus = 5;
+                //}
+                // Decouple below code because
+                //Tight coupling between Controller class and Business logic
+                //For any new employee type addition, we end up modifying the controller code adding extra over heads in the development and testing process
+                EmployeeManagerFactory empFactory = new EmployeeManagerFactory();
+                IEmployeeManager empManager = empFactory.GetEmployeeManager(employee.EmployeeTypeID);
+                employee.Bonus = empManager.GetBonus();
+                employee.HourlyPay = empManager.GetPay();
+
                 db.Employees.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");
