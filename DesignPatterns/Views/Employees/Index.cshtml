@@ -4,8 +4,23 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-<div class="well">Differentiate employees as permanent and contract and segregate their pay scales as well as bonus based on their employee types</div>
+<h2>Factory Method Design Pattern </h2>
+<div class="well">
+    <h4>Recap Simple Factory</h4>
+    <ul>
+        <li>     Simple factory abstracts the creation details of the product</li>
+        <li>   Simple factory refers to the newly created object through an interface</li>
+        <li>     Any new type creation is handled with a change of code in the factory class and not in the client code</li>
+    </ul>
+</div>
+<div class="well">
+    <h4> Business Requirement</h4>
+    <ul>
+        <li>    Differentiate employees as permanent and contract and segregate their pay scales as well as bonus based on their employee types.  ( We have achieved this using simple factory in Part 8 of the Design Patterns tutorial)</li>
+        <li>    Calculate Permanent employee house rent allowance (Not for Conttract employees)</li>
+        <li>   Calculate Contract employee medical allowance (Not for Permanent employees)</li>
+    </ul>
+</div>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -32,6 +47,13 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.HourlyPay)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.MedicalAllowance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HouseAllowance)
         </th>
         <th></th>
     </tr>
@@ -60,6 +82,13 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HourlyPay)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.MedicalAllowance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HouseAllowance)
             </td>
 
             <td>

@@ -1,5 +1,5 @@
 ﻿drop table Employee
-
+drop table Employee_Type
 
 
 CREATE TABLE [dbo].[Employee_Type]
@@ -7,27 +7,22 @@ CREATE TABLE [dbo].[Employee_Type]
     [Id]           INT           IDENTITY (1, 1) NOT NULL,
     [EmployeeType] VARCHAR (150) NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
-
 )
 
 
-CREATE TABLE [dbo].[Employee]
-(
-    [Id]             INT          IDENTITY (1, 1) NOT NULL,
-    [Name]           VARCHAR (50) NOT NULL,
-    [JobDescription] VARCHAR (50) NOT NULL,
-    [Number]         VARCHAR (50) NOT NULL,
-    [Department]     VARCHAR (50) NOT NULL,
-    [HourlyPay]      DECIMAL (18) NOT NULL,
-    [Bonus]          DECIMAL (18) NOT NULL,
-    [EmployeeTypeID] INT          NOT NULL,
+CREATE TABLE [dbo].[Employee] (
+    [Id]               INT          IDENTITY (1, 1) NOT NULL,
+    [Name]             VARCHAR (50) NOT NULL,
+    [JobDescription]   VARCHAR (50) NOT NULL,
+    [Number]           VARCHAR (50) NOT NULL,
+    [Department]       VARCHAR (50) NOT NULL,
+    [HourlyPay]        DECIMAL (18) NOT NULL,
+    [Bonus]            DECIMAL (18) NOT NULL,
+    [EmployeeTypeID]   INT          NOT NULL,
+    [HouseAllowance]   DECIMAL (18) NULL,
+    [MedicalAllowance] DECIMAL (18) NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_Employee_EmployeeType] FOREIGN KEY ([EmployeeTypeID]) REFERENCES [dbo].[Employee_Type] ([Id])
-
-)
-
-
-
+    CONSTRAINT [FK_Employee_EmployeeType] FOREIGN KEY ([EmployeeTypeID]) REFERENCES [dbo].[Employee_Type] ([Id]) ); 
 
 insert into Employee_Type (EmployeeType) values('Permanent')
 insert into Employee_Type (EmployeeType) values('Contract')

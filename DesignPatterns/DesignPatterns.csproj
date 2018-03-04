@@ -155,6 +155,10 @@
     <Compile Include="Employee_Manager\ContractEmployeeManager.cs" />
     <Compile Include="Employee_Manager\IEmployeeManager.cs" />
     <Compile Include="Employee_Manager\PermanentEmployeeManager.cs" />
+    <Compile Include="FactoryMethod\BaseEmployeeFactory.cs" />
+    <Compile Include="FactoryMethod\ContractEmployeeFactory.cs" />
+    <Compile Include="FactoryMethod\EmployeeManagerFactory.cs" />
+    <Compile Include="FactoryMethod\PermanentEmployeeFactory.cs" />
     <Compile Include="Factory\EmployeeManagerFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

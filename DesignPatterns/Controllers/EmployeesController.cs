@@ -1,5 +1,6 @@
 ﻿using DesignPatterns.Employee_Manager;
 using DesignPatterns.Factory;
+using DesignPatterns.FactoryMethod;
 using DesignPatterns.Models;
 using Logger;
 using System.Data.Entity;
@@ -11,9 +12,9 @@ namespace DesignPatterns.Controllers
 {
     public class EmployeesController : Controller
     {
-       
+
         private DesignPatternTestDbEntities db = new DesignPatternTestDbEntities();
-               
+
         // GET: Employees
         public ActionResult Index()
         {
@@ -47,10 +48,11 @@ namespace DesignPatterns.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( Employee employee)
+        public ActionResult Create(Employee employee)
         {
             if (ModelState.IsValid)
             {
+                #region Factory Pattern
                 //if (employee.EmployeeTypeID == 1)
                 //{
                 //    employee.HourlyPay = 8;
@@ -64,10 +66,17 @@ namespace DesignPatterns.Controllers
                 // Decouple below code because
                 //Tight coupling between Controller class and Business logic
                 //For any new employee type addition, we end up modifying the controller code adding extra over heads in the development and testing process
-                EmployeeManagerFactory empFactory = new EmployeeManagerFactory();
-                IEmployeeManager empManager = empFactory.GetEmployeeManager(employee.EmployeeTypeID);
-                employee.Bonus = empManager.GetBonus();
-                employee.HourlyPay = empManager.GetPay();
+                //EmployeeManagerFactory empFactory = new EmployeeManagerFactory();
+                //IEmployeeManager empManager = empFactory.GetEmployeeManager(employee.EmployeeTypeID);
+                //employee.Bonus = empManager.GetBonus();
+                //employee.HourlyPay = empManager.GetPay();
+                #endregion
+
+
+                #region Factory method pattern
+                BaseEmployeeFactory empFactory = new EmployeeManagerFactory().CreateFactory(employee);
+                empFactory.ApplySalary();
+                #endregion
 
                 db.Employees.Add(employee);
                 db.SaveChanges();

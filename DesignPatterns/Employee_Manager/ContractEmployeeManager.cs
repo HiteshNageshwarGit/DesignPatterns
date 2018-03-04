@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace DesignPatterns.Employee_Manager
+﻿namespace DesignPatterns.Employee_Manager
 {
     public class ContractEmployeeManager : IEmployeeManager
     {
@@ -15,6 +10,11 @@ namespace DesignPatterns.Employee_Manager
         public decimal GetPay()
         {
             return 12;
+        }
+
+        public decimal GetMedicalAllowance()
+        {
+            return 100;
         }
     }
 }

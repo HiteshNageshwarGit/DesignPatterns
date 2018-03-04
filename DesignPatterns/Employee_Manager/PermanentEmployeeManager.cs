@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace DesignPatterns.Employee_Manager
+﻿namespace DesignPatterns.Employee_Manager
 {
     public class PermanentEmployeeManager : IEmployeeManager
     {
@@ -16,5 +11,11 @@ namespace DesignPatterns.Employee_Manager
         {
             return 8;
         }
+
+        public decimal GetHouseAllowance()
+        {
+            return 50;
+        }
+        
     }
 }
